@@ -3,10 +3,12 @@
 /* eslint-disable import/prefer-default-export */
 
 export class StringValidator {
-  constructor() {
+  constructor(customValidators) {
     this._isRequired = false;
     this._minLength = null;
     this._substrings = [];
+    this._customValidators = customValidators;
+    this._readyValidators = [];
   }
 
   required() {
@@ -38,6 +40,18 @@ export class StringValidator {
       if (!str.includes(substr)) return false;
     }
 
+    for (const validator of this._readyValidators) {
+      if (!validator(str)) return false;
+    }
+
     return true;
+  }
+
+  test(name, value) {
+    const validator = this._customValidators[name];
+
+    this._readyValidators.push((matcher) => validator(matcher, value));
+
+    return this;
   }
 }

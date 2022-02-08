@@ -3,10 +3,12 @@
 /* eslint-disable import/prefer-default-export */
 
 export class NumberValidator {
-  constructor() {
+  constructor(customValidators) {
     this._isRequired = false;
     this._isPositive = false;
     this._range = [-Infinity, Infinity];
+    this._customValidators = customValidators;
+    this._readyValidators = [];
   }
 
   required() {
@@ -32,6 +34,18 @@ export class NumberValidator {
 
     if (this._isPositive && num <= 0) return false;
 
+    for (const validator of this._readyValidators) {
+      if (!validator(num)) return false;
+    }
+
     return num >= this._range[0] && num <= this._range[1];
+  }
+
+  test(name, value) {
+    const validator = this._customValidators[name];
+
+    this._readyValidators.push((matcher) => validator(matcher, value));
+
+    return this;
   }
 }
