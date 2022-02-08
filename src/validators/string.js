@@ -1,9 +1,12 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable import/prefer-default-export */
 
 export class StringValidator {
-  _isRequired = false;
-  _minLength = null;
-  _substrings = [];
+  constructor() {
+    this._isRequired = false;
+    this._minLength = null;
+    this._substrings = [];
+  }
 
   required() {
     this._isRequired = true;
