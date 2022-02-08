@@ -2,7 +2,11 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable import/prefer-default-export */
 // @ts-check
-import { StringValidator, NumberValidator } from './validators/index.js';
+import {
+  StringValidator,
+  NumberValidator,
+  ArrayValidator,
+} from './validators/index.js';
 
 export class Validator {
   string() {
@@ -11,5 +15,9 @@ export class Validator {
 
   number() {
     return new NumberValidator();
+  }
+
+  array() {
+    return new ArrayValidator();
   }
 }
