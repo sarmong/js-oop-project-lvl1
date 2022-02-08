@@ -3,3 +3,4 @@
 export { StringValidator } from './string.js';
 export { NumberValidator } from './number.js';
 export { ArrayValidator } from './array.js';
+export { ObjectValidator } from './object.js';

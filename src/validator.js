@@ -6,6 +6,7 @@ import {
   StringValidator,
   NumberValidator,
   ArrayValidator,
+  ObjectValidator,
 } from './validators/index.js';
 
 export class Validator {
@@ -19,5 +20,9 @@ export class Validator {
 
   array() {
     return new ArrayValidator();
+  }
+
+  object() {
+    return new ObjectValidator();
   }
 }
