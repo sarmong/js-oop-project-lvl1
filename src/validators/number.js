@@ -30,6 +30,7 @@ export class NumberValidator {
   }
 
   isValid(num) {
+    if (!this._isRequired && (num === null || num === undefined)) return true;
     if (this._isRequired && typeof num !== 'number') return false;
 
     if (this._isPositive && num <= 0) return false;
